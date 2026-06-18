@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stage MSP — Soufiane Fhaili</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--serif); }
+  </style>
+<style>
+  :root{--ctx-bg:#F6F4EF;--ctx-card:#FFFFFF;--ctx-ink:#1B2A4A;--ctx-muted:#838B9E;--ctx-line:#E7E2D4;--ctx-track:#EFEBDF;}
+  .ctx-block{margin-top:3rem;}
+  .ctx-head{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+  .ctx-head h2{margin:0;font-size:1.35rem;font-weight:600;color:var(--charcoal);}
+  .ctx-head .tag-bar{width:6px;height:28px;border-radius:3px;background:var(--emerald);flex:none;}
+  .ctx-head .count{font-size:.8rem;color:var(--soft-gray);margin-right:auto;}
+  .ctx-card{background:var(--ctx-card);border:1px solid var(--ctx-line);border-radius:14px;padding:20px;margin-bottom:1.25rem;}
+
+  /* TIMELINE */
+  .tl{position:relative;padding-left:36px;}
+  .tl::before{content:'';position:absolute;left:14px;top:8px;bottom:8px;width:2px;background:var(--ctx-line);}
+  .tl-item{position:relative;margin-bottom:6px;padding:10px 14px 10px 20px;border-radius:10px;
+    background:var(--ctx-card);border:1px solid var(--ctx-line);transition:.2s;cursor:default;}
+  .tl-item:hover{border-color:var(--soft-gray);}
+  .tl-dot{position:absolute;left:-22px;top:14px;width:12px;height:12px;border-radius:50%;
+    border:2px solid var(--ctx-line);background:var(--ctx-card);z-index:1;}
+  .tl-dot.obs{background:#4A6FA5;border-color:#4A6FA5;}
+  .tl-dot.anim{background:var(--emerald);border-color:var(--emerald);width:16px;height:16px;left:-24px;top:12px;}
+  .tl-dot.anim::after{content:'\2605';position:absolute;top:-1px;left:2px;font-size:8px;color:#fff;}
+  .tl-date{font-size:.72rem;font-weight:600;color:var(--emerald);letter-spacing:.02em;}
+  .tl-role{display:inline-block;font-size:.65rem;padding:1px 8px;border-radius:4px;margin-left:6px;font-weight:500;}
+  .tl-role.obs{background:#E1E8F2;color:#2C4A7C;}
+  .tl-role.anim{background:#D1EDE4;color:#0A4A3A;}
+  .tl-theme{font-size:.85rem;color:var(--charcoal);margin:2px 0 0;font-weight:500;}
+  .tl-teacher{font-size:.75rem;color:var(--soft-gray);margin:0;}
+
+  /* SESSION CARDS */
+  .sc-grid{display:grid;gap:1.5rem;margin-top:1.5rem;}
+  .sc-card{border:1px solid var(--ctx-line);border-radius:14px;overflow:hidden;
+    background:var(--ctx-card);transition:.2s;}
+  .sc-card:hover{border-color:var(--soft-gray);}
+  .sc-head{padding:18px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    border-bottom:1px solid var(--ctx-line);}
+  .sc-num{width:44px;height:44px;border-radius:50%;background:var(--emerald);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.1rem;flex:none;}
+  .sc-info{flex:1;min-width:140px;}
+  .sc-info h3{margin:0;font-size:1rem;font-weight:600;color:var(--charcoal);}
+  .sc-info .meta{font-size:.78rem;color:var(--soft-gray);margin-top:2px;}
+  .sc-tag{font-size:.68rem;padding:2px 10px;border-radius:4px;font-weight:500;}
+  .sc-tag.gold{background:#F5EDD9;color:#8A7030;}
+  .sc-body{padding:18px 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.sc-body{grid-template-columns:1fr;}}
+  .sc-col h4{font-size:.82rem;font-weight:600;color:var(--charcoal);margin:0 0 8px;
+    display:flex;align-items:center;gap:6px;}
+  .sc-col h4 .badge{font-size:.6rem;padding:1px 7px;border-radius:3px;font-weight:500;}
+  .sc-col p,.sc-col li{font-size:.8rem;color:var(--soft-gray);line-height:1.55;margin:0 0 4px;}
+  .sc-col ul{margin:4px 0;padding-left:16px;}
+  .sc-col ul li{margin-bottom:3px;}
+  .sc-dl{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:500;
+    color:var(--emerald);text-decoration:none;padding:6px 14px;border-radius:8px;
+    border:1px solid var(--ctx-line);margin-top:8px;transition:.2s;}
+  .sc-dl:hover{background:#D1EDE4;border-color:var(--emerald);}
+  .sc-phases{margin-top:14px;overflow-x:auto;border-radius:10px;border:1px solid var(--ctx-line);
+    font-size:.78rem;}
+  .sc-phases table{width:100%;border-collapse:collapse;min-width:500px;}
+  .sc-phases th{background:#E8F1EE;color:var(--charcoal);font-weight:600;padding:8px 10px;
+    text-align:left;border-bottom:1px solid var(--ctx-line);}
+  .sc-phases td{padding:7px 10px;border-bottom:1px solid var(--ctx-line);color:var(--soft-gray);
+    vertical-align:top;line-height:1.5;}
+  .sc-phases tr:last-child td{border-bottom:none;}
+
+  /* ANALYSIS COMPARISON */
+  .ac-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:1.25rem;}
+  @media(max-width:640px){.ac-grid{grid-template-columns:1fr;}}
+  .ac-col{border:1px solid var(--ctx-line);border-radius:12px;overflow:hidden;}
+  .ac-col-head{padding:12px 16px;text-align:center;font-weight:600;font-size:.82rem;color:#fff;}
+  .ac-col-head.s1{background:#7BA3C9;}
+  .ac-col-head.s2{background:#5A8F7C;}
+  .ac-col-head.s3{background:#3D6B5E;}
+  .ac-row{padding:12px 16px;border-bottom:1px solid var(--ctx-line);}
+  .ac-row:last-child{border-bottom:none;}
+  .ac-row-label{font-size:.72rem;font-weight:600;color:var(--charcoal);margin-bottom:4px;
+    text-transform:uppercase;letter-spacing:.04em;}
+  .ac-row-text{font-size:.78rem;color:var(--soft-gray);line-height:1.55;}
+  .ac-note{font-size:.78rem;color:var(--soft-gray);margin-top:1rem;text-align:center;}
+
+  /* SYNTHESIS */
+  .synth-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:1.25rem;}
+  @media(max-width:640px){.synth-grid{grid-template-columns:1fr;}}
+  .synth-card{border:1px solid var(--ctx-line);border-radius:14px;padding:20px;background:var(--ctx-card);}
+  .synth-card h4{font-size:.92rem;font-weight:600;color:var(--charcoal);margin:0 0 10px;}
+  .synth-card p,.synth-card li{font-size:.82rem;color:var(--soft-gray);line-height:1.6;}
+  .synth-card ul{margin:0;padding-left:18px;}
+  .synth-card ul li{margin-bottom:5px;}
+  .synth-quote{border-left:3px solid var(--emerald);padding:10px 16px;margin:14px 0;
+    background:#F6FBF9;border-radius:0 10px 10px 0;font-style:italic;color:var(--charcoal);font-size:.85rem;}
+
+  /* DOWNLOADS */
+  .dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:1.25rem;}
+  .dl-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid var(--ctx-line);
+    border-radius:10px;background:var(--ctx-card);text-decoration:none;transition:.2s;}
+  .dl-item:hover{border-color:var(--soft-gray);background:#FAF9F5;}
+  .dl-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+    font-size:1.1rem;flex:none;color:#fff;}
+  .dl-icon.docx{background:#295B8A;}
+  .dl-icon.pdf{background:#C0392B;}
+  .dl-icon.xlsx{background:#1F7A3D;}
+  .dl-info{flex:1;min-width:0;}
+  .dl-info .name{font-size:.82rem;font-weight:500;color:var(--charcoal);display:block;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .dl-info .meta{font-size:.7rem;color:var(--soft-gray);}
+  .dl-arr{font-size:1.2rem;color:var(--soft-gray);flex:none;}
+
+  /* ── Grid 2 colonnes — comme Formation ── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  }
+
+  .crmef-stats {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.75rem; margin-top: 1.5rem;
+  }
+  .crmef-stat {
+    background: var(--emerald-light); border-radius: var(--r-sm);
+    padding: 0.75rem 1rem; text-align: center;
+  }
+  .crmef-stat .num {
+    font-size: 1.25rem; font-weight: 700; color: var(--emerald); line-height: 1.2;
+  }
+  .crmef-stat .lbl {
+    font-size: 0.7rem; color: var(--soft-gray); text-transform: uppercase;
+    letter-spacing: 0.04em; margin-top: 2px;
+  }
+
+  /* ── Carrousel (gl style) ── */
+  .gl { position: relative; border-radius: 14px; overflow: hidden; background: #f0ede8; aspect-ratio: 16/9; max-height: 55vh; }
+  .gl-track { position: relative; width: 100%; height: 100%; }
+  .gl-slide {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: scale(0.92);
+  }
+  .gl-slide.active { opacity: 1; z-index: 1; transform: scale(1); }
+  .gl-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #gl-msp-track .gl-slide img { object-position: center 30%; }
+  .gl-nav {
+    position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+    display: flex; align-items: center; justify-content: space-between;
+    z-index: 2; gap: 0.5rem;
+  }
+  .gl-btn {
+    width: 2.5rem; height: 2.5rem; border-radius: 50%; border: none;
+    background: rgba(255,255,255,0.85); color: var(--charcoal); font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px); transition: transform 0.2s;
+  }
+  .gl-btn:hover { transform: scale(1.1); }
+  .gl-dots {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .gl-dot {
+    width: 0.5rem; height: 0.5rem; border-radius: 50%; border: none; cursor: pointer;
+    background: #d4c9c0; transition: all 0.3s; padding: 0;
+  }
+  .gl-dot.active { width: 1.5rem; border-radius: 4px; background: var(--emerald); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">S</span>
+      <span class="logo-text">Soufiane <span class="surname">Fhaili</span></span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><img src="images/crmef/logo%20crmef.png" alt="CRMEF" class="header-logo">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">À propos</a>
+      <a href="formation.html">Formation</a>
+      <a href="msp.html">MSP</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" style="padding-top:5rem;">
+    <div class="container">
+      <span class="section-eyebrow fade-in">Terrain</span>
+      <h1 class="section-title fade-in" style="font-size:2.25rem;">Stage — Mises en Situations Professionnelles</h1>
+      <p class="section-desc fade-in fade-in-delay-1" style="max-width:36rem;margin-bottom:2rem;">
+        Immersion au Collège Ibn Toumert — observations, co-animations et prises en charge
+        de séances d'informatique en classe de 2<sup>ème</sup> année collège.
+      </p>
+
+      <div class="highlight fade-in">
+        <strong>Établissement :</strong> Collège Ibn Toumert, Hay Hassani, Marrakech<br>
+        <strong>Classes :</strong> 2<sup>ème</sup> année collège · groupes de 34 élèves<br>
+        <strong>Période :</strong> Jeudis, en rotation avec une équipe de 5 stagiaires<br>
+        <strong>Tuteur :</strong> Mme Amina EL MOUSAID<br>
+        <strong>Séances :</strong> <span style="color:var(--emerald);font-weight:600;">11 journées de stage</span> · <span style="color:var(--gold);font-weight:600;">3 séances animées</span> · du 05/02 au 21/05/2026<br>
+        <strong>Séances animées :</strong> 26/02/2026 (Formules) · 12/03/2026 (Fonctions) · 21/05/2026 (Graphiques)
+      </div>
+
+      <!-- ═══════════ CONTEXTE ÉTABLISSEMENT ═══════════ -->
+      <div class="content-section fade-in">
+        <div class="grid-2">
+          <div>
+            <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 12 2l10 20H2z"/><path d="M8 22V12h8v10"/></svg> Contexte — Collège Ibn Toumert</h2>
+            <p>
+              Les séances se déroulaient en salle informatique équipée d'un vidéoprojecteur et de
+              18 postes individuels, dans la classe de <strong>2AC-8 Groupe 2</strong> (34 élèves).
+              Le stage s'inscrivait dans une rotation hebdomadaire entre <strong>5 stagiaires</strong>,
+              chaque séance étant co-construite avec la tutrice <strong>Mme Amina EL MOUSAID</strong>
+              et adaptée à la progression de la séquence Tableur.
+            </p>
+            <div class="crmef-stats">
+              <div class="crmef-stat">
+                <div class="num">1405</div>
+                <div class="lbl">Élèves</div>
+              </div>
+              <div class="crmef-stat">
+                <div class="num">34</div>
+                <div class="lbl">Classes</div>
+              </div>
+              <div class="crmef-stat">
+                <div class="num">54</div>
+                <div class="lbl">Personnel</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="gl" id="gl-college">
+              <div class="gl-track" id="gl-college-track"></div>
+              <div class="gl-nav" id="gl-college-nav" style="display:none;">
+                <button class="gl-btn" id="gl-college-prev" aria-label="Précédent">&larr;</button>
+                <button class="gl-btn" id="gl-college-next" aria-label="Suivant">&rarr;</button>
+              </div>
+            </div>
+            <div class="gl-dots" id="gl-college-dots"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ TIMELINE ═══════════ -->
+      <div class="ctx-block fade-in">
+        <div class="ctx-head">
+          <span class="tag-bar" style="background:var(--emerald);"></span>
+          <h2>Parcours — 11 journées de stage</h2>
+          <span class="count">05/02 → 21/05/2026</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--soft-gray);margin:-.5rem 0 1.25rem;max-width:32rem;">
+          Un jeudi sur deux, de février à mai 2026 — 11 journées de stage au total.
+          En bleu les séances observées, en vert celles que j'ai animées.
+        </p>
+        <div class="tl">
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">05/02/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Environnement du tableur Excel</div><div class="tl-teacher">Pr. Amina EL MOUSAID (tutrice)</div></div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">12/02/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Environnement du tableur Excel</div><div class="tl-teacher">Pr. Amina EL MOUSAID (tutrice)</div></div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">19/02/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Formules dans Excel — Saleh AIT TATA (08:30) + Oussama ETTAGNATI (10:30)</div><div class="tl-teacher">2 stagiaires</div></div>
+          <div class="tl-item" style="background:#EFF7F4;border-color:var(--emerald);">
+            <span class="tl-dot anim"></span>
+            <div class="tl-date">26/02/2026</div><span class="tl-role anim">Animé</span>
+            <div class="tl-theme"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" style="color:var(--gold);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Formules simples — adresses relatives et absolues</div>
+            <div class="tl-teacher">Moi (10:30) · Youssef OUADRAHMANE observé (08:30)</div>
+          </div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">05/03/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Fonctions SOMME, MOYENNE, MAX, MIN — Oussama (08:30) + Saleh (10:30)</div><div class="tl-teacher">2 stagiaires</div></div>
+          <div class="tl-item" style="background:#EFF7F4;border-color:var(--emerald);">
+            <span class="tl-dot anim"></span>
+            <div class="tl-date">12/03/2026</div><span class="tl-role anim">Animé</span>
+            <div class="tl-theme"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" style="color:var(--gold);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Fonctions MIN, MAX, SOMME, MOYENNE</div>
+            <div class="tl-teacher">Moi (10:30) · Youssef OUADRAHMANE observé (08:30)</div>
+          </div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">26/03/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Mise en forme + Évaluation</div><div class="tl-teacher">Saleh AIT TATA (stagiaire)</div></div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">23/04/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Évaluation Fonctions et mise en forme</div><div class="tl-teacher">Pr. Amina EL MOUSAID (tutrice)</div></div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">30/04/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Évaluation pratique graphiques + Fonction SI</div><div class="tl-teacher">Pr. Amina EL MOUSAID (tutrice)</div></div>
+          <div class="tl-item"><span class="tl-dot obs"></span><div class="tl-date">14/05/2026</div><span class="tl-role obs">Observé</span><div class="tl-theme">Révision graphiques + Fonction SI</div><div class="tl-teacher">Pr. Amina EL MOUSAID (tutrice)</div></div>
+          <div class="tl-item" style="background:#EFF7F4;border-color:var(--emerald);">
+            <span class="tl-dot anim"></span>
+            <div class="tl-date">21/05/2026</div><span class="tl-role anim">Animé</span>
+            <div class="tl-theme"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" stroke="none" style="color:var(--gold);"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Insertion des graphiques (histogramme, secteur, courbe)</div>
+            <div class="tl-teacher">Moi (11:30) · 3 stagiaires observés avant (08:30–10:30)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SÉANCES ANIMÉES ═══════════ -->
+      <div class="ctx-block fade-in">
+        <div class="ctx-head">
+          <span class="tag-bar" style="background:var(--gold);"></span>
+          <h2>Les 3 séances animées</h2>
+          <span class="count">Prise en charge</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--soft-gray);margin:-.5rem 0 0;max-width:36rem;">
+          Trois séances d'enseignement sur la séquence Tableur (Excel), encadré par Mme Amina EL MOUSAID.
+        </p>
+
+        <div class="sc-grid">
+
+          <!-- SÉANCE 1 -->
+          <div class="sc-card">
+            <div class="sc-head">
+              <div class="sc-num">A1</div>
+              <div class="sc-info">
+                <h3>Formules simples — Adresses relatives et absolues</h3>
+                <div class="meta">26/02/2026 · 10:30–12:30 · 2h · 2AC-8 Groupe 2</div>
+              </div>
+              <span class="sc-tag gold">1<sup>ère</sup> prise en charge</span>
+            </div>
+            <div class="sc-body">
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Contexte</h4>
+                <p>Première séance en autonomie complète. Les élèves avaient déjà découvert l'environnement Excel. Objectif : manipuler les formules simples (+, -, *, /) et distinguer adresse relative / absolue. Situation problème contextualisée dans une librairie.</p>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Dimension didactique</h4>
+                <ul>
+                  <li>Situation problème contextualisée — les élèves se sont immédiatement projetés</li>
+                  <li>Progression du concret (multiplication simple) vers l'abstrait (adresses, recopie)</li>
+                  <li>Confusion adresse relative/absolue gérée par réexplication</li>
+                </ul>
+              </div>
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Dimension pédagogique</h4>
+                <ul>
+                  <li>Gestion du temps respectée (2h), déplacement dans toute la salle</li>
+                  <li>Alternance français (technique) + arabe (explications)</li>
+                  <li>Démonstration pas à pas au vidéoprojecteur</li>
+                </ul>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Dimension relationnelle</h4>
+                <ul>
+                  <li>Élèves engagés et intéressés — l'activité pratique motive</li>
+                  <li>Climat général positif, relation bienveillante</li>
+                  <li>Interventions du tuteur pour la discipline en début de séance</li>
+                </ul>
+                <a class="sc-dl" href="MSP/Rapports/Seance 2026-02-26 (2) (animateur).docx">📄 Télécharger le rapport</a>
+                <a class="sc-dl" href="MSP/Seance_Animee_1_Formules.docx" style="margin-left:4px;">📄 Fiche APP</a>
+              </div>
+            </div>
+            <div class="sc-phases">
+              <table>
+                <thead><tr><th style="width:90px;">Phase</th><th>Activités enseignant</th><th>Activités élèves</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Mise en situation</strong></td><td>Rappel environnement Excel, projection situation problème (librairie), questions guidées</td><td>Participent au rappel, comprennent la situation, proposent des hypothèses</td></tr>
+                  <tr><td><strong>Analyse</strong></td><td>Démonstration formules, exercice pratique, correction collective, introduction adresses relatives/absolues</td><td>Suivent la démonstration, réalisent l'exercice, aident les voisins, participent à la correction</td></tr>
+                  <tr><td><strong>Synthèse</strong></td><td>Questions de synthèse, trace écrite projetée</td><td>Répondent aux questions, copient la trace écrite</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SÉANCE 2 -->
+          <div class="sc-card">
+            <div class="sc-head">
+              <div class="sc-num">A2</div>
+              <div class="sc-info">
+                <h3>Fonctions MIN, MAX, SOMME, MOYENNE</h3>
+                <div class="meta">12/03/2026 · 10:30–11:30 · 1h · 2AC-8 Groupe 2</div>
+              </div>
+              <span class="sc-tag gold">2<sup>ème</sup> prise en charge</span>
+            </div>
+            <div class="sc-body">
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Contexte</h4>
+                <p>Suite de la séquence Tableur. Séance réduite à 1h (la 2<sup>ème</sup> heure réservée par la tutrice pour un contrôle). Objectif : introduire les fonctions intégrées d'Excel. Situation problème contextualisée dans une bibliothèque.</p>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Dimension didactique</h4>
+                <ul>
+                  <li>Situation problème (bibliothèque) — chaque fonction a trouvé son utilité</li>
+                  <li>Progression du rappel vers le nouveau contenu</li>
+                  <li>Confusion entre ; et : corrigée sur le moment</li>
+                </ul>
+              </div>
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Dimension pédagogique</h4>
+                <ul>
+                  <li>Timing respecté malgré la contrainte de 1h</li>
+                  <li>Démonstration pas à pas, bonne participation des élèves</li>
+                  <li>Exercice noté utilisé comme évaluation formative</li>
+                </ul>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Dimension relationnelle</h4>
+                <ul>
+                  <li>Bonne interactivité, élèves actifs et impliqués</li>
+                  <li>Climat positif — je me sens plus à l'aise</li>
+                </ul>
+                <a class="sc-dl" href="MSP/Rapports/Seance 2026-03-12 (2) (animateur).docx">📄 Télécharger le rapport</a>
+                <a class="sc-dl" href="MSP/Seance_Animee_2_Fonctions.docx" style="margin-left:4px;">📄 Fiche APP</a>
+              </div>
+            </div>
+            <div class="sc-phases">
+              <table>
+                <thead><tr><th style="width:90px;">Phase</th><th>Activités enseignant</th><th>Activités élèves</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Mise en situation</strong></td><td>Rappel des prérequis (formules, adresses), projection situation problème (bibliothèque), questionnement</td><td>Participent au rappel, comprennent la situation, proposent des solutions</td></tr>
+                   <tr><td><strong>Analyse</strong></td><td>Démonstration SOMME, MAX, MIN, MOYENNE — explication syntaxe — TP pratique — correction collective</td><td>Suivent la démonstration, testent chaque fonction, participent à la correction</td></tr>
+                   <tr><td><strong>Synthèse</strong></td><td>Trace écrite projetée, synthèse orale sur l'utilité de chaque fonction</td><td>Copient la trace écrite, participent à la synthèse</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- SÉANCE 3 -->
+          <div class="sc-card">
+            <div class="sc-head">
+              <div class="sc-num">A3</div>
+              <div class="sc-info">
+                <h3>Insertion des graphiques (histogramme, secteur, courbe)</h3>
+                <div class="meta">21/05/2026 · 11:30–12:30 · 1h · 2AC-8 Groupe 1</div>
+              </div>
+              <span class="sc-tag gold">3<sup>ème</sup> prise en charge</span>
+            </div>
+            <div class="sc-body">
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Contexte</h4>
+                <p>Dernière séance de la séquence Tableur. Les élèves maîtrisent formules et fonctions. Objectif : représenter visuellement des données (histogramme, secteur, courbe). Situation problème : temps d'utilisation des écrans — les élèves se sont immédiatement identifiés.</p>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Dimension didactique</h4>
+                <ul>
+                  <li>Lien interdisciplinaire avec l'Histoire-Géographie exploité efficacement</li>
+                  <li>Choix du type de graphique bien compris grâce à la comparaison</li>
+                  <li>Exercice noté pour valider les acquis de la séquence</li>
+                </ul>
+              </div>
+              <div class="sc-col">
+                <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Dimension pédagogique</h4>
+                <ul>
+                  <li>Timing de 1h respecté, démonstration efficace</li>
+                  <li>Contextualisation avec situations réelles (temps d'écran)</li>
+                  <li>Aucun incident — climat serein</li>
+                </ul>
+                <h4 style="margin-top:10px;"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Dimension relationnelle</h4>
+                <ul>
+                  <li>Élèves engagés et motivés — la situation a créé un intérêt immédiat</li>
+                  <li>Posture d'enseignant confiante et naturelle</li>
+                </ul>
+                <a class="sc-dl" href="MSP/Rapports/Seance 2026-05-21 (4) (animateur).docx">📄 Télécharger le rapport</a>
+                <a class="sc-dl" href="MSP/Seance_Animee_3_Graphiques.docx" style="margin-left:4px;">📄 Fiche APP</a>
+              </div>
+            </div>
+            <div class="sc-phases">
+              <table>
+                <thead><tr><th style="width:90px;">Phase</th><th>Activités enseignant</th><th>Activités élèves</th></tr></thead>
+                <tbody>
+                   <tr><td><strong>Mise en situation</strong></td><td>Rappel mise en forme, situation problème (temps d'écran), questionnement</td><td>Participent au rappel, proposent des idées de représentation</td></tr>
+                   <tr><td><strong>Analyse</strong></td><td>Démonstration 3 types (histogramme, secteur, courbe), TP guidé, exercice noté</td><td>Suivent la démonstration, testent l'insertion, comparent les types, réalisent l'exercice noté</td></tr>
+                   <tr><td><strong>Synthèse</strong></td><td>Trace écrite, bilan de la séquence Tableur</td><td>Copient la trace, participent au bilan</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══════════ ANALYSE COMPARATIVE ═══════════ -->
+      <div class="ctx-block fade-in">
+        <div class="ctx-head">
+          <span class="tag-bar" style="background:var(--terracotta);"></span>
+          <h2>Progression — Analyse comparative</h2>
+          <span class="count">3 dimensions × 3 séances</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--soft-gray);margin:-.5rem 0 0;max-width:36rem;">
+          Comment ma pratique a évolué à travers les trois prises en charge.
+        </p>
+        <div class="ac-grid">
+          <div class="ac-col">
+            <div class="ac-col-head s1">A1 — Formules</div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Didactique</div><div class="ac-row-text">Situation problème contextualisée. Confusion relatives/absolues. Progression concret → abstrait.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Pédagogique</div><div class="ac-row-text">2h tenues. Alternance français/arabe. Intervention du tuteur pour discipline.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Relationnel</div><div class="ac-row-text">Élèves engagés. Climat positif. Posture nerveuse — première séance.</div></div>
+          </div>
+          <div class="ac-col">
+            <div class="ac-col-head s2">A2 — Fonctions</div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Didactique</div><div class="ac-row-text">Chaque fonction reliée à un besoin. Confusion syntaxe (; vs :) gérée. Rappel efficace.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Pédagogique</div><div class="ac-row-text">1h seulement — adaptation. Exercice noté intégré. Transitions plus fluides.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Relationnel</div><div class="ac-row-text">Bonne interactivité. Je me sens plus à l'aise. Climat maintenu.</div></div>
+          </div>
+          <div class="ac-col">
+            <div class="ac-col-head s3">A3 — Graphiques</div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Didactique</div><div class="ac-row-text">Lien interdisciplinaire (HG). Choix du graphique raisonné. Exercice noté validant.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Pédagogique</div><div class="ac-row-text">1h maîtrisée. Situation problème « temps d'écran » très engageante. Aucun incident.</div></div>
+            <div class="ac-row"><div class="ac-row-label"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Relationnel</div><div class="ac-row-text">Posture confiante et naturelle. Élèves captivés. Climat serein — autonomie complète.</div></div>
+          </div>
+        </div>
+        <p class="ac-note">← Début hésitant ··· Progression visible ··· Fin maîtrisée →</p>
+      </div>
+
+      <!-- ═══════════ MOMENTS EN CLASSE ═══════════ -->
+      <div class="content-section fade-in">
+        <div class="grid-2">
+          <div>
+            <div class="gl" id="gl-msp-moments">
+              <div class="gl-track" id="gl-msp-track"></div>
+              <div class="gl-nav" id="gl-msp-nav" style="display:none;">
+                <button class="gl-btn" id="gl-msp-prev" aria-label="Précédent">&larr;</button>
+                <button class="gl-btn" id="gl-msp-next" aria-label="Suivant">&rarr;</button>
+              </div>
+            </div>
+            <div class="gl-dots" id="gl-msp-dots"></div>
+          </div>
+          <div>
+            <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Moments en classe</h2>
+            <blockquote style="border-left:3px solid var(--terracotta);padding:1rem 1.25rem;margin:1rem 0 0;background:#FBF8F5;border-radius:0 10px 10px 0;font-style:italic;color:var(--charcoal);font-size:.95rem;line-height:1.7;">
+              « La première séance devant une classe reste mon souvenir le plus marquant.
+              J'avais préparé chaque minute, mais rien ne remplace le regard des élèves
+              quand ils comprennent pour la première fois. Passer de l'appréhension à
+              l'aisance en trois séances, c'est toute la progression que ce stage m'a offerte. »
+              <cite style="display:block;margin-top:.75rem;font-size:.8rem;color:var(--soft-gray);font-style:normal;">— Soufiane Fhaili</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ SYNTHÈSE RÉFLEXIVE ═══════════ -->
+      <div class="ctx-block fade-in">
+        <div class="ctx-head">
+          <span class="tag-bar" style="background:var(--charcoal);"></span>
+          <h2>Synthèse réflexive — Ce que j'ai appris</h2>
+          <span class="count">Théorisation & bilan</span>
+        </div>
+        <div class="synth-grid">
+          <div class="synth-card">
+            <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Progression pédagogique</h4>
+            <ul>
+              <li>Meilleure gestion du temps et des transitions entre phases</li>
+              <li>Diversification des supports (diaporama, fichiers Excel, fiche pédagogique)</li>
+              <li>Capacité à m'adapter aux contraintes (1h au lieu de 2h)</li>
+              <li>Anticipation des règles de travail en début de séance</li>
+            </ul>
+          </div>
+          <div class="synth-card">
+            <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Progression didactique</h4>
+            <ul>
+              <li>Contextualisation croissante des apprentissages (librairie → bibliothèque → temps d'écran)</li>
+              <li>Liaison interdisciplinaire avec l'Histoire-Géographie pour les graphiques</li>
+              <li>Conception d'exercices progressifs et différenciés</li>
+              <li>Gestion des erreurs comme levier d'apprentissage</li>
+            </ul>
+          </div>
+          <div class="synth-card">
+            <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Progression relationnelle</h4>
+            <ul>
+              <li>Maintien d'un climat de classe favorable tout au long des séances</li>
+              <li>Gestion discrète mais ferme des perturbations</li>
+              <li>Communication bienveillante — voix, regard, déplacement</li>
+              <li>Autonomie croissante dans la gestion de classe (moins d'interventions du tuteur)</li>
+            </ul>
+          </div>
+          <div class="synth-card">
+            <h4><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Concepts théoriques mobilisés</h4>
+            <ul>
+              <li><strong>Situation problème</strong> (Meirieu) — contextualisation motivante à chaque séance</li>
+              <li><strong>Conflit cognitif</strong> (Piaget) — le prix qui ne se met pas à jour</li>
+              <li><strong>Médiation / étayage</strong> (Vygotsky) — guidage pas à pas, analogie du déplacement</li>
+              <li><strong>Zone proximale de développement</strong> — exercice guidé → exercice autonome</li>
+              <li><strong>Transposition didactique</strong> (Chevallard) — liaison HG pour les graphiques</li>
+              <li><strong>Évaluation formative</strong> (Scallon) — circulation, correction collective, feedback immédiat</li>
+              <li><strong>Apprentissage signifiant</strong> (Ausubel) — lien avec les représentations existantes</li>
+              <li><strong>Pédagogie de la maîtrise</strong> (Bloom) — vérification des acquis avant de clore</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════ TÉLÉCHARGEMENTS ═══════════ -->
+      <div class="ctx-block fade-in">
+        <div class="ctx-head">
+          <span class="tag-bar" style="background:var(--emerald);"></span>
+          <h2>Ressources téléchargeables</h2>
+          <span class="count">Rapports & fiches</span>
+        </div>
+        <p style="font-size:.85rem;color:var(--soft-gray);margin:-.5rem 0 1rem;max-width:36rem;">
+          L'ensemble des documents produits dans le cadre du stage.
+        </p>
+        <div class="dl-grid">
+          <a class="dl-item" href="MSP/Rapport_de_Stage_Soufiane_Fhaili_Final.docx">
+            <div class="dl-icon docx">W</div>
+            <div class="dl-info"><span class="name">Rapport de stage final</span><span class="meta">Document de synthèse · .docx</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+          <a class="dl-item" href="MSP/Rapports/Seance 2026-02-26 (2) (animateur).docx">
+            <div class="dl-icon docx">W</div>
+            <div class="dl-info"><span class="name">Séance A1 — Formules simples</span><span class="meta">26/02/2026 · Rapport d'observation</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+          <a class="dl-item" href="MSP/Rapports/Seance 2026-03-12 (2) (animateur).docx">
+            <div class="dl-icon docx">W</div>
+            <div class="dl-info"><span class="name">Séance A2 — Fonctions MIN, MAX, SOMME, MOYENNE</span><span class="meta">12/03/2026 · Rapport d'observation</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+          <a class="dl-item" href="MSP/Rapports/Seance 2026-05-21 (4) (animateur).docx">
+            <div class="dl-icon docx">W</div>
+            <div class="dl-info"><span class="name">Séance A3 — Insertion des graphiques</span><span class="meta">21/05/2026 · Rapport d'observation</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+          <a class="dl-item" href="MSP/Fiche_formules_simples.pdf">
+            <div class="dl-icon pdf">PDF</div>
+            <div class="dl-info"><span class="name">Fiche pédagogique — Formules simples</span><span class="meta">Support élève · .pdf</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+          <a class="dl-item" href="MSP/Fiche_Excel_Graphiques.pdf">
+            <div class="dl-icon pdf">PDF</div>
+            <div class="dl-info"><span class="name">Fiche pédagogique — Graphiques Excel</span><span class="meta">Support élève · .pdf</span></div>
+            <span class="dl-arr">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-sep"></div>
+  <div class="name">Soufiane Fhaili</div>
+  <div class="role">Enseignant stagiaire en Informatique</div>
+  <div class="inst">CRMEF Ibn Roch Marrakech — 2025–2026</div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="images/msp/images.js"></script>
+<script>
+var COLLEGE_IMAGES = [
+  "MSP/images/doorOfCollege.jpg",
+  "MSP/images/4c07db76-d46a-4da7-826b-d9937a6b671f.jpg",
+  "MSP/images/54a28dac-afbb-4772-930b-e70b0fa620fa.jpg",
+  "MSP/images/d71d6db2-7290-40bd-b316-d90d86c6d4ad.jpg",
+  "MSP/images/ebf4d695-5254-42a2-89bc-c97ceb223512.jpg"
+];
+
+(function() {
+  var configs = [
+    { images: COLLEGE_IMAGES, track: 'gl-college-track', nav: 'gl-college-nav', prev: 'gl-college-prev', next: 'gl-college-next', dots: 'gl-college-dots', auto: false },
+    { images: window.MSP_IMAGES || [], track: 'gl-msp-track', nav: 'gl-msp-nav', prev: 'gl-msp-prev', next: 'gl-msp-next', dots: 'gl-msp-dots', auto: false }
+  ];
+
+  configs.forEach(function(c) {
+    if (!c.images || !c.images.length) return;
+    var trackEl = document.getElementById(c.track);
+    var navEl = document.getElementById(c.nav);
+    var dotsEl = document.getElementById(c.dots);
+    var prevBtn = document.getElementById(c.prev);
+    var nextBtn = document.getElementById(c.next);
+    if (!trackEl) return;
+    var idx = 0, slides = [], dots = [];
+    c.images.forEach(function(src, i) {
+      var div = document.createElement('div');
+      div.className = 'gl-slide' + (i === 0 ? ' active' : '');
+      var img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Photo ' + (i+1);
+      if (i !== 0) img.loading = 'lazy';
+      div.appendChild(img);
+      trackEl.appendChild(div);
+      slides.push(div);
+      var dot = document.createElement('button');
+      dot.className = 'gl-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Photo ' + (i+1));
+      (function(idx) { dot.onclick = function() { go(idx); }; })(i);
+      dotsEl.appendChild(dot);
+      dots.push(dot);
+    });
+    navEl.style.display = 'flex';
+    function go(i) {
+      slides[idx].classList.remove('active');
+      dots[idx].classList.remove('active');
+      idx = (i + slides.length) % slides.length;
+      slides[idx].classList.add('active');
+      dots[idx].classList.add('active');
+    }
+    prevBtn.onclick = function() { go(idx - 1); };
+    nextBtn.onclick = function() { go(idx + 1); };
+  });
+})();
+</script>
+</body>
+</html>

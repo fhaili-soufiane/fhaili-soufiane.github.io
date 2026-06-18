@@ -1,0 +1,39 @@
+Algorithme Transport
+Variables
+    nom : chaine
+    montant_brut, destination, frais_transport : reel
+    charge_societe, charge_client, total_a_payer : reel
+Debut
+    Ecrire("Nom du client : ")
+    Lire(nom)
+    Ecrire("Montant brut (DH) : ")
+    Lire(montant_brut)
+    Ecrire("Destination (Km) : ")
+    Lire(destination)
+    frais_transport ← montant_brut * 0.05
+    Si montant_brut >= 10000 Alors
+        Si destination < 100 Alors
+            charge_societe ← frais_transport
+            charge_client ← 0
+        Sinon
+            charge_societe ← frais_transport * 0.75
+            charge_client ← frais_transport * 0.25
+        Fin Si
+    Sinon
+        Si destination < 100 Alors
+            charge_societe ← frais_transport * 0.5
+            charge_client ← frais_transport * 0.5
+        Sinon
+            charge_societe ← frais_transport * 0.25
+            charge_client ← frais_transport * 0.75
+        Fin Si
+    Fin Si
+    total_a_payer ← montant_brut + charge_client
+    Ecrire("Nom Client        : ", nom)
+    Ecrire("Montant Brut       : ", montant_brut, " DH")
+    Ecrire("Destination        : ", destination, " Km")
+    Ecrire("Frais Transport    : ", frais_transport, " DH")
+    Ecrire("Charge Societe     : ", charge_societe, " DH")
+    Ecrire("Charge Client      : ", charge_client, " DH")
+    Ecrire("Total a Payer      : ", total_a_payer, " DH")
+Fin

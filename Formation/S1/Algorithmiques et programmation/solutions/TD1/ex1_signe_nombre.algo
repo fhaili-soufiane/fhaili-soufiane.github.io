@@ -1,0 +1,14 @@
+Algorithme SigneNombre
+Variables
+    n : reel
+Debut
+    Ecrire("Entrez un nombre : ")
+    Lire(n)
+    Si n > 0 Alors
+        Ecrire("Positif")
+    Sinon Si n < 0 Alors
+        Ecrire("Negatif")
+    Sinon
+        Ecrire("Nul")
+    Fin Si
+Fin

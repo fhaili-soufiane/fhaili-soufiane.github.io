@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture des systèmes — S1 — Soufiane Fhaili</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--serif); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">S</span>
+      <span class="logo-text">Soufiane <span class="surname">Fhaili</span></span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><img src="images/crmef/logo%20crmef.png" alt="CRMEF" class="header-logo">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">À propos</a>
+      <a href="formation.html">Formation</a>
+      <a href="msp.html">MSP</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" style="padding-top:5rem;">
+    <div class="container">
+      <a href="semestre1.html" class="back-link fade-in">← Retour au Semestre 1</a>
+
+      <div class="module-hero fade-in">
+        <span class="tag">Semestre 1</span>
+        <h1>Architecture des systèmes informatiques</h1>
+        <p class="subtitle">
+          Comprendre le fonctionnement interne d'un ordinateur : du processeur à la mémoire,
+          en passant par le stockage et les périphériques.
+        </p>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-1">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Ressources de cours</h2>
+        <p>
+          Ce module m'a permis de comprendre l'architecture interne d'un ordinateur, depuis
+          les composants matériels fondamentaux jusqu'à leur interaction avec le système
+          d'exploitation. Il ne s'agit pas seulement de connaître le nom des pièces, mais
+          de comprendre comment elles communiquent, comment les données circulent et comment
+          ces connaissances éclairent l'enseignement de l'informatique au collège.
+        </p>
+        <p>
+          La difficulté de ce module réside dans l'abstraction : on ne voit pas l'électricité
+          circuler dans les circuits, on ne voit pas la mémoire se vider. L'enseignant doit
+          trouver des analogies parlantes (la mémoire comme une bibliothèque, le processeur
+          comme un chef d'orchestre) pour rendre ces concepts accessibles à des collégiens.
+        </p>
+        <div class="highlight">
+          <strong>Ce que j'ai retenu :</strong> L'architecture d'un ordinateur repose sur
+          trois éléments essentiels : le processeur (unité de calcul), la mémoire (stockage
+          temporaire et permanent) et les bus (voies de communication). Comprendre ces
+          bases permet d'expliquer pourquoi un ordinateur est lent, pourquoi un fichier
+          prend de la place, ou comment fonctionne un réseau.
+        </div>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-2">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-3 0-6-1-7-3 0 4 2 7 7 8"/><path d="M12 8c3 0 6-1 7-3 0 4-2 7-7 8"/></svg> Compétences développées</h2>
+        <div class="key-points">
+          <div class="key-point">
+            <h4>Unité Centrale (CPU)</h4>
+            <p>Le cerveau de l'ordinateur : unité arithmétique et logique (UAL), unité de contrôle, registres. Fréquence, cœurs, et architecture 32/64 bits.</p>
+          </div>
+          <div class="key-point">
+            <h4>Mémoire vive (RAM)</h4>
+            <p>Mémoire volatile où sont stockées les données en cours d'utilisation. Rôle, types (DDR), capacité et vitesse.</p>
+          </div>
+          <div class="key-point">
+            <h4>Mémoire de masse (Stockage)</h4>
+            <p>Disques durs (HDD), SSD, clés USB. Comparaison vitesse / capacité / durabilité. Du bitmap au secteur.</p>
+          </div>
+          <div class="key-point">
+            <h4>Bus et communication</h4>
+            <p>Comment les données circulent entre CPU, RAM et périphériques. Bus système, bus d'entrée/sortie.</p>
+          </div>
+          <div class="key-point">
+            <h4>Carte mère</h4>
+            <p>Le circuit imprimé principal qui relie tous les composants. Chipset, sockets, connecteurs.</p>
+          </div>
+          <div class="key-point">
+            <h4>Périphériques d'entrée/sortie</h4>
+            <p>Clavier, souris, écran, imprimante — comment ils communiquent avec l'unité centrale via les ports et contrôleurs.</p>
+          </div>
+          <div class="key-point">
+            <h4>Système d'exploitation</h4>
+            <p>Interface entre le matériel et les logiciels. Gestion des processus, de la mémoire, des fichiers.</p>
+          </div>
+          <div class="key-point">
+            <h4>Cycle d'exécution</h4>
+            <p>Le cycle fetch-decode-execute : comment le processeur lit, interprète et exécute les instructions pas à pas.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-3">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Analyse pédagogique</h2>
+        <div class="highlight">
+          <p style="margin-bottom:0.5rem;"><strong>Enjeux pour l'enseignement au collège :</strong></p>
+          <p>
+            En 2ème année collège, les élèves découvrent l'informatique comme discipline.
+            Le module d'architecture leur donne les bases pour comprendre ce qu'il y a
+            « dans la boîte ». L'enjeu est d'éviter le cours magistral abstrait au profit
+            d'une approche concrète : montrer des composants réels, utiliser des simulateurs,
+            faire des analogies. Par exemple, comparer la RAM à un bureau de travail (plus
+            il est grand, plus on peut étaler de dossiers) et le disque dur à une armoire
+            de rangement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-sep"></div>
+  <div class="name">Soufiane Fhaili</div>
+  <div class="role">Enseignant stagiaire en Informatique</div>
+  <div class="inst">CRMEF Ibn Roch Marrakech — 2025–2026</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

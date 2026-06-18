@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soufiane Fhaili — E-Portfolio CRMEF</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--serif); }
+
+    .tl-wrap {
+      position: relative;
+      max-width: 600px;
+      margin: 2rem auto 0;
+      padding-left: 2rem;
+    }
+    .tl-line {
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: #d4c9c0;
+    }
+    .tl-card {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    .tl-card:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute;
+      left: -1.65rem;
+      top: 1.2rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid #a05c4c;
+      background: #fff;
+      z-index: 1;
+    }
+    .tl-card-inner {
+      background: #fff;
+      border: 1px solid #e6ddd4;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+    .tl-card-inner:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .tl-date {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #a05c4c;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .tl-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      margin: 0 0 0.2rem;
+    }
+    .tl-desc {
+      font-size: 0.88rem;
+      color: #6b6b6b;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    @media (max-width: 640px) {
+      .tl-wrap { padding-left: 1.5rem; }
+      .tl-dot { left: -1.35rem; top: 1rem; width: 12px; height: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">S</span>
+      <span class="logo-text">Soufiane <span class="surname">Fhaili</span></span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><img src="images/crmef/logo%20crmef.png" alt="CRMEF" class="header-logo">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">À propos</a>
+      <a href="formation.html">Formation</a>
+      <a href="msp.html">MSP</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <span class="hero-label">CRMEF Marrakech · Formation 2025–2026</span>
+      <h1>Mon parcours de formation</h1>
+      <p>
+        Ce portfolio retrace mon cheminement d'enseignant stagiaire en Informatique&nbsp;:
+        cours, réflexions pédagogiques, stage de terrain et projets — le tout construit
+        au fil de l'année au CRMEF Ibn Roch.
+      </p>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-eyebrow">Parcours</span>
+        <h2 class="section-title">Aperçu de la formation</h2>
+        <p class="section-desc">
+          Un programme en deux semestres qui alterne apports théoriques,
+          réflexion didactique et immersion sur le terrain.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <a href="formation.html" class="card fade-in fade-in-delay-1">
+          <div class="card-icon"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <h3>Semestre 1</h3>
+          <p>8 modules fondamentaux&nbsp;: algorithmique, architecture, didactique, TICE, planification, gestion, recherche-action et sciences de l'éducation.</p>
+          <span class="tag emerald">8 modules</span>
+        </a>
+        <a href="formation.html" class="card fade-in fade-in-delay-2">
+          <div class="card-icon"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><circle cx="14" cy="10" r="1"/><circle cx="14" cy="14" r="1"/><circle cx="14" cy="18" r="1"/></svg></div>
+          <h3>Semestre 2</h3>
+          <p>Analyse des pratiques, évaluation, production didactique, réseaux, développement web, éthique professionnelle et vie scolaire.</p>
+          <span class="tag emerald">8 modules</span>
+        </a>
+        <a href="msp.html" class="card fade-in fade-in-delay-3">
+          <div class="card-icon"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 12 2l10 20H2z"/><path d="M8 22V12h8v10"/></svg></div>
+          <h3>Stage MSP</h3>
+          <p>Stage au Collège Ibn Toumert, Hay Hassani, Marrakech — classes de 2&#x1e93;me ann&#x1e93;e collège. Observations, co-animations et prises en charge.</p>
+          <span class="tag terracotta">Terrain</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-eyebrow">Chronologie</span>
+        <h2 class="section-title">Mon parcours</h2>
+      </div>
+
+      <div class="tl-wrap fade-in">
+        <div class="tl-line"></div>
+
+        <div class="tl-card">
+          <div class="tl-dot"></div>
+          <div class="tl-card-inner">
+            <span class="tl-date">Septembre 2025</span>
+            <h3 class="tl-title">Rentrée au CRMEF</h3>
+            <p class="tl-desc">Début de la formation en enseignement de l'informatique au CRMEF Ibn Roch Marrakech.</p>
+          </div>
+        </div>
+
+        <div class="tl-card">
+          <div class="tl-dot"></div>
+          <div class="tl-card-inner">
+            <span class="tl-date">Septembre 2025 – Janvier 2026</span>
+            <h3 class="tl-title">Semestre 1</h3>
+            <p class="tl-desc">8 modules fondamentaux : algorithmique, architecture, didactique, TICE, planification, gestion, méthodologie de recherche et sciences de l'éducation.</p>
+          </div>
+        </div>
+
+        <div class="tl-card">
+          <div class="tl-dot"></div>
+          <div class="tl-card-inner">
+            <span class="tl-date">5 Février – 21 Mai 2026</span>
+            <h3 class="tl-title">Stage de MSP</h3>
+            <p class="tl-desc">11 jeudis au Collège Ibn Toumert — observations, co-animations et 3 séances animées en tableur Excel (formules, fonctions, graphiques).</p>
+          </div>
+        </div>
+
+        <div class="tl-card">
+          <div class="tl-dot"></div>
+          <div class="tl-card-inner">
+            <span class="tl-date">Février – Mai 2026</span>
+            <h3 class="tl-title">Semestre 2</h3>
+            <p class="tl-desc">Analyse des pratiques, évaluation, production didactique, réseaux, développement web, éthique professionnelle et vie scolaire.</p>
+          </div>
+        </div>
+
+        <div class="tl-card">
+          <div class="tl-dot"></div>
+          <div class="tl-card-inner">
+            <span class="tl-date">19 Juillet 2026</span>
+            <h3 class="tl-title">Soutenance</h3>
+            <p class="tl-desc">Présentation du portfolio et du rapport de stage devant le jury du CRMEF.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="highlight fade-in">
+        <strong>Soutenance&nbsp;:</strong> 19 juillet 2026 — Portfolio réalisé en HTML/CSS/JS,
+        conçu pour refléter mon parcours d'enseignant stagiaire en informatique.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-sep"></div>
+  <div class="name">Soufiane Fhaili</div>
+  <div class="role">Enseignant stagiaire en Informatique</div>
+  <div class="inst">CRMEF Ibn Roch Marrakech — 2025–2026</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

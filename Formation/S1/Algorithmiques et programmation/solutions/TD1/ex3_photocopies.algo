@@ -1,0 +1,16 @@
+Algorithme Photocopies
+Variables
+    n : entier
+    prix : reel
+Debut
+    Ecrire("Nombre de photocopies : ")
+    Lire(n)
+    Si n <= 10 Alors
+        prix ← n * 0.5
+    Sinon Si n <= 20 Alors
+        prix ← 10 * 0.5 + (n - 10) * 0.4
+    Sinon
+        prix ← 10 * 0.5 + 10 * 0.4 + (n - 20) * 0.3
+    Fin Si
+    Ecrire("Prix a payer : ", prix, " DH")
+Fin

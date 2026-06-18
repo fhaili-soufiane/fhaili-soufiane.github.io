@@ -1,0 +1,16 @@
+Algorithme PlusGrand
+Variables
+    a, b : reel
+Debut
+    Ecrire("A = ")
+    Lire(a)
+    Ecrire("B = ")
+    Lire(b)
+    Si a > b Alors
+        Ecrire("Le plus grand est ", a)
+    Sinon Si b > a Alors
+        Ecrire("Le plus grand est ", b)
+    Sinon
+        Ecrire("Les deux nombres sont egaux")
+    Fin Si
+Fin

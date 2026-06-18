@@ -1,0 +1,30 @@
+Algorithme OrdreDecroissant
+Variables
+    a, b, c : reel
+Debut
+    Ecrire("Nombre 1 : ")
+    Lire(a)
+    Ecrire("Nombre 2 : ")
+    Lire(b)
+    Ecrire("Nombre 3 : ")
+    Lire(c)
+    Si a >= b et a >= c Alors
+        Si b >= c Alors
+            Ecrire(a, b, c)
+        Sinon
+            Ecrire(a, c, b)
+        Fin Si
+    Sinon Si b >= a et b >= c Alors
+        Si a >= c Alors
+            Ecrire(b, a, c)
+        Sinon
+            Ecrire(b, c, a)
+        Fin Si
+    Sinon
+        Si a >= b Alors
+            Ecrire(c, a, b)
+        Sinon
+            Ecrire(c, b, a)
+        Fin Si
+    Fin Si
+Fin

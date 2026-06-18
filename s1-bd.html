@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bases de données — S1 — Soufiane Fhaili</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--serif); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">S</span>
+      <span class="logo-text">Soufiane <span class="surname">Fhaili</span></span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><img src="images/crmef/logo%20crmef.png" alt="CRMEF" class="header-logo">
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">À propos</a>
+      <a href="formation.html">Formation</a>
+      <a href="msp.html">MSP</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="section" style="padding-top:5rem;">
+    <div class="container">
+      <a href="semestre1.html" class="back-link fade-in">← Retour au Semestre 1</a>
+
+      <div class="module-hero fade-in">
+        <span class="tag">Semestre 1</span>
+        <h1>Bases de données</h1>
+        <p class="subtitle">
+          Introduction aux bases de données, au modèle relationnel, au langage SQL et
+          à la conception de schémas avec le modèle Entité-Association.
+        </p>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-1">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Ressources de cours</h2>
+        <p>
+          Ce module, réalisé en collaboration, couvre l'ensemble des fondamentaux des bases
+          de données : de la différence entre donnée et information jusqu'aux requêtes SQL
+          complexes. Chaque étudiant a travaillé sur un thème spécifique, produisant des
+          fiches synthétiques qui couvrent l'intégralité du programme.
+        </p>
+        <div class="highlight">
+          <strong>Ce que j'ai retenu :</strong> Une base de données n'est pas qu'une collection
+          de données — c'est un système organisé qui garantit l'intégrité, la cohérence et
+          l'efficacité des accès. Le modèle relationnel et le langage SQL sont les piliers
+          incontournables de la gestion de données moderne.
+        </div>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-2">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M12 8c-3 0-6-1-7-3 0 4 2 7 7 8"/><path d="M12 8c3 0 6-1 7-3 0 4-2 7-7 8"/></svg> Compétences développées</h2>
+        <div class="key-points">
+          <div class="key-point">
+            <h4>Introduction aux BD</h4>
+            <p>Donnée vs Information, limites des fichiers Excel, pourquoi un SGBD, exemples concrets (école, hôpital, location).</p>
+          </div>
+          <div class="key-point">
+            <h4>SGBD &amp; Architecture</h4>
+            <p>Définition SGBD, exemples (Oracle, MySQL, SQL Server, PostgreSQL), architecture 3 niveaux.</p>
+          </div>
+          <div class="key-point">
+            <h4>Modèle Entité-Association</h4>
+            <p>Entité, attribut, identifiant, association, cardinalités — les briques de la conception conceptuelle.</p>
+          </div>
+          <div class="key-point">
+            <h4>Diagramme ERD</h4>
+            <p>Cas concret Université : Étudiant / Département / Cours.</p>
+          </div>
+          <div class="key-point">
+            <h4>MER → Modèle Relationnel</h4>
+            <p>Règles de transformation, clé primaire, clé étrangère, table associative.</p>
+          </div>
+          <div class="key-point">
+            <h4>Modèle Relationnel</h4>
+            <p>Relation, tuple, attribut, domaine.</p>
+          </div>
+          <div class="key-point">
+            <h4>Contraintes SQL</h4>
+            <p>PRIMARY KEY, FOREIGN KEY, NOT NULL, UNIQUE, CHECK, DEFAULT.</p>
+          </div>
+          <div class="key-point">
+            <h4>Normalisation</h4>
+            <p>1NF, 2NF, 3NF et dépendance fonctionnelle — pour éviter la redondance.</p>
+          </div>
+          <div class="key-point">
+            <h4>Anomalies &amp; Redondance</h4>
+            <p>Anomalies d'insertion, de suppression et de mise à jour.</p>
+          </div>
+          <div class="key-point">
+            <h4>Types de données SQL</h4>
+            <p>INT, VARCHAR, DATE, DECIMAL, BOOLEAN.</p>
+          </div>
+          <div class="key-point">
+            <h4>DDL — Création</h4>
+            <p>CREATE DATABASE, CREATE TABLE, ALTER TABLE, DROP TABLE.</p>
+          </div>
+          <div class="key-point">
+            <h4>DML — Manipulation</h4>
+            <p>INSERT, UPDATE, DELETE, SELECT simple, fonctions d'agrégation (COUNT, SUM, AVG, MIN, MAX).</p>
+          </div>
+          <div class="key-point">
+            <h4>Requêtes avancées</h4>
+            <p>GROUP BY, HAVING, jointures (INNER, LEFT, RIGHT), division.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-3">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Travaux pratiques</h2>
+        <p>
+          Ce document collectif rassemble les contributions de chaque étudiant du groupe sur
+          un thème spécifique des bases de données. J'ai personnellement travaillé sur la
+          partie <strong>SELECT simple</strong> (SELECT *, WHERE, ORDER BY, DISTINCT).
+        </p>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-3">
+        <h2><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg> Réflexion personnelle</h2>
+        <div class="highlight">
+          <p style="margin-bottom:0.5rem;"><strong>Pourquoi les bases de données sont essentielles ?</strong></p>
+          <p>
+            Dans un monde numérique où les données sont partout, savoir concevoir, interroger et
+            gérer une base de données est une compétence fondamentale. Que ce soit pour une
+            application web, un système de gestion scolaire ou une application mobile, les
+            principes appris dans ce module — du modèle conceptuel aux requêtes SQL — sont
+            universels.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-section fade-in fade-in-delay-4">
+        <h2>Téléchargements</h2>
+        <div class="dl-box">
+          <a class="dl-link" href="Formation/S1/Bases%20de%20donn%C3%A9es/Travaux_BD_2026_G1.pdf"><svg class="icon-inline" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Travaux BD — Groupe 1</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-sep"></div>
+  <div class="name">Soufiane Fhaili</div>
+  <div class="role">Enseignant stagiaire en Informatique</div>
+  <div class="inst">CRMEF Ibn Roch Marrakech — 2025–2026</div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
